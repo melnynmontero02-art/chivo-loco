@@ -443,19 +443,23 @@
     /* price — never shrinks */
     .menu-price { flex-shrink: 0; }
 
-    /* order pill — absolutely positioned so it never shifts the price */
+    /* order pill — sits between description and price, collapses when not hovered */
     .menu-item-order {
-      position: absolute; right: 22px;
       display: inline-flex; align-items: center; gap: 6px;
       background: #25D366; color: var(--white);
-      padding: 6px 14px; border-radius: 99px;
+      border-radius: 99px;
       font-size: .68rem; font-weight: 800; letter-spacing: .5px;
-      white-space: nowrap;
-      opacity: 0; transform: translateX(8px);
-      transition: opacity var(--t) var(--ease), transform var(--t) var(--ease);
+      white-space: nowrap; flex-shrink: 0;
+      /* collapsed state */
+      max-width: 0; overflow: hidden;
+      padding: 6px 0; opacity: 0;
+      transition: max-width .3s var(--ease), opacity .25s var(--ease), padding .3s var(--ease);
       pointer-events: none;
     }
-    .menu-item:hover .menu-item-order { opacity: 1; transform: translateX(0); pointer-events: all; }
+    .menu-item:hover .menu-item-order {
+      max-width: 140px; opacity: 1;
+      padding: 6px 14px; pointer-events: all;
+    }
     .menu-item-left { display: flex; align-items: center; gap: 16px; }
     .mi-dot {
       width: 36px; height: 36px; border-radius: 10px;
